@@ -1,0 +1,38 @@
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile on;
+    directio 4m;
+    directio_alignment 512;
+
+    tcp_nopush on;
+    tcp_nodelay off;
+
+    keepalive_timeout 180s;
+    keepalive_requests 100;
+    keepalive_disable msie6;
+    send_timeout 60s;
+    client_body_timeout 60s;
+    client_header_timeout 30s;
+
+    gzip on;
+    gzip_min_length 1024;
+    gzip_buffers 4 16k;
+    gzip_comp_level 5;
+    gzip_proxied any;
+    gzip_types text/plain application/json application/x-javascript text/css appl
+    ication/xml;
+    gzip_vary on;
+    gzip_disable "MSIE [1-6]\.";
+
+    fastcgi_buffer_size 64k;
+    fastcgi_buffers 4 64k;
+    fastcgi_busy_buffers_size 128k;
+    fastcgi_temp_file_write_size 256k;
+    fastcgi_connect_timeout 300;
+    fastcgi_send_timeout 300;
+    fastcgi_read_timeout 300;
+
+    include conf.d/*.conf;
+}
