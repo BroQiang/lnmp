@@ -1,14 +1,47 @@
+#!/bin/bash
 # 获取安装包
 
 export packages="${baseDir}/packages"
 [ -d ${packages} ] || mkdir -p ${packages}
+
+function fnDependentUbuntu1710()
+{
+    fnSuccess "Ubuntu 17.10"
+    apt install -y ${apt} >> ${logFile} 2>&1
+}
+
+function fnDependentFedora27()
+{
+    fnSuccess "Fedora 27"
+    dnf install -y ${yum} >> ${logFile} 2>&1
+}
+
+function fnDependentCentOS7()
+{
+    fnSuccess "CentOS 7"
+    yum install -y ${yum} >> ${logFile} 2>&1
+}
 
 function fnDependent()
 {
     # 安装依赖关系
     fnSuccess "Starting install dependent,may be some time,please waiting ....."
     fnLog "Starting install dependent ."
-    yum install -y ${yum} >> ${logFile} 2>&1
+    case $systemVersion in
+    CentOS7 )
+        fnDependentCentOS7
+        ;;
+    Ubuntu17.10 )
+        fnDependentUbuntu1710
+        ;;
+    Fedora27 )
+        fnDependentFedora27
+        ;;
+    * )
+        fnError "Can not support your system,Script exit"
+        exit
+        ;;
+    esac
 
 }
 
@@ -76,7 +109,6 @@ function fnConfigSystem()
     fi
 }
 
-# 配置 MySQL
 function fnConfigMySQL()
 {
     fnSuccess "\nStarting config MySQL,please wait ..."
@@ -100,9 +132,11 @@ log-error=${mysql_data_dir}log/mysqld_error.log\npid-file=${mysql_data_dir}run/m
     ${desc_dir}/mysql/bin/mysqld --defaults-file=${desc_dir}/mysql/etc/my.cnf --initialize --user=${mysql_user}
 
     # 配置启动脚本
-    cp -rf ${desc_dir}/mysql/usr/lib/systemd/system/mysqld.service /usr/lib/systemd/system
+    
+    
+    cp -rf ${desc_dir}/mysql/lib/systemd/system/mysqld.service /lib/systemd/system/
     # 修改启动脚本
-    sed -i 's:/var/run/mysqld/mysqld.pid:'${mysql_data_dir}'/run/mysqld.pid:g' /usr/lib/systemd/system/mysqld.service
+    sed -i 's:/var/run/mysqld/mysqld.pid:'${mysql_data_dir}'/run/mysqld.pid:g' /lib/systemd/system/mysqld.service
 
     # 启动服务
     fnConfigSystem mysql
@@ -125,7 +159,7 @@ function fnConfigPHP()
 
     # 复制配置文件
     cp -rf ${dir}/php.ini-production ${desc_dir}/php/etc/php.ini
-    cp -rf ${dir}/sapi/fpm/php-fpm.service /lib/systemd/system
+    cp -rf ${dir}/sapi/fpm/php-fpm.service /lib/systemd/system/
     cp -rf ${desc_dir}/php/etc/php-fpm.conf.default ${desc_dir}/php/etc/php-fpm.conf
     cp -rf ${desc_dir}/php/etc/php-fpm.d/www.conf.default ${desc_dir}/php/etc/php-fpm.d/www.conf
 
@@ -200,7 +234,7 @@ function fnInstall()
             fnMySQLCMake "$i"
             fnSuccess "\nStaring make MySQL,Time will be long,please waiting ..."
             fnLog "Staring compile Mysql"
-            make -j 2 >> ${logFile} 
+            make >> ${logFile} 
             make install >> ${logFile}
         else
             fnConfigure "$i"

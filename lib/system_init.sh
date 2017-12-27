@@ -1,3 +1,4 @@
+#!/bin/bash
 # 用来初始化操作系统
 
 # 关闭 SELinux

@@ -1,6 +1,8 @@
 # ############### 系统配置 #############
-# 自己指定操作系统版本，如 RHEL7、Ubuntu16.04
-systemVersion=CentOS7
+# 自己指定操作系统版本，要和下面列表中的操作系统完全相同。
+# 现在支持系统： [ CentOS7 | Ubuntu17.10 | Fedora27]
+# Fedora 27 未经过测试
+systemVersion=Ubuntu17.10
 
 # 日志保存目录
 toLogDir=logs
@@ -43,6 +45,11 @@ makeJ=4
 yum="gcc gcc-c++ cmake bison bison-devel ncurses ncurses-devel autoconf pcre-devel \
 openssl-devel zlib-devel libxml2-devel libcurl-devel libwebp-devel libjpeg* \
 libpng-devel openldap-devel libmcrypt-devel freetype-devel readline-devel re2c"
+
+# 所有的 apt 安装的以来关系
+apt="build-essential cmake libncurses5-dev bison libxml2-dev libssl-dev \
+libcurl4-gnutls-dev libjpeg-dev libpng-dev libfreetype6-dev libmcrypt-dev \
+libpcre3-dev zlib1g-dev re2c libreadline-dev"
 
 
 # ############## MySQL Config ##############

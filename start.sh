@@ -35,11 +35,13 @@ fi
 clear
 fnEchoColor "\n########## Starting config OS . ##########" black bwhite
 
-# 查看并确定操作系统版本
-. ${baseDir}/lib/system_version.sh
 
 # 初始化系统
-. ${baseDir}/lib/system_init.sh
+if [[ "$systemVersion" == "CentOS7" ]]; then
+    . ${baseDir}/lib/system_init.sh
+else
+    fnWarning "Can not support your system, there is no automatic initialization"
+fi
 
 clear
 fnEchoColor "########## Starting install LNMP #########" black bwhite
