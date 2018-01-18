@@ -186,6 +186,7 @@ function fnConfigNginx()
     # 复制配置文件
     mv ${desc_dir}/nginx/conf/nginx.conf ${desc_dir}/nginx/conf/nginx.conf_`date +%Y-%m-%d`_bak
     cp -rf ${baseDir}/script/nginx.conf ${desc_dir}/nginx/conf/
+    sed -i 's/^user.*$/user '${nginx_user}';/' ${desc_dir}/nginx/conf/nginx.conf
     [ -d ${desc_dir}/nginx/conf/conf.d ] || mkdir -p ${desc_dir}/nginx/conf/conf.d
     cp -rf ${baseDir}/script/http.main ${desc_dir}/nginx/conf/conf.d/
     cp -rf ${baseDir}/script/vhost.conf ${desc_dir}/nginx/conf/conf.d/
