@@ -134,7 +134,7 @@ log-error=${mysql_data_dir}log/mysqld_error.log\npid-file=${mysql_data_dir}run/m
     # 配置启动脚本
     
     
-    cp -rf ${desc_dir}/mysql/lib/systemd/system/mysqld.service /lib/systemd/system/
+    cp -rf ${baseDir}/script/mysqld.service /lib/systemd/system/
     # 修改启动脚本
     sed -i 's:/var/run/mysqld/mysqld.pid:'${mysql_data_dir}'/run/mysqld.pid:g' /lib/systemd/system/mysqld.service
 
