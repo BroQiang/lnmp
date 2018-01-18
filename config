@@ -2,7 +2,7 @@
 # 自己指定操作系统版本，要和下面列表中的操作系统完全相同。
 # 现在支持系统： [ CentOS7 | Ubuntu17.10 | Fedora27]
 # Fedora 27 未经过测试
-systemVersion=CentOS7
+systemVersion=Ubuntu17.10
 
 # 日志保存目录
 toLogDir=logs
@@ -79,8 +79,12 @@ php_compile="--prefix=${desc_dir}/php --with-config-file-path=${desc_dir}/php/et
 --enable-inline-optimization --enable-mbregex --enable-mbstring --enable-pcntl --with-zlib --with-readline"
 
 # ############## Nginx Config ##############
-nginx_version=nginx-1.12.2
-nginx_url=https://nginx.org/download/${nginx_version}.tar.gz
+nginx_version=tengine-2.2.1.tar.gz
+nginx_url=http://tengine.taobao.org/download/
+
+# 将 Nginx 替换成了 tengine
+# nginx_version=nginx-1.12.2
+# nginx_url=https://nginx.org/download/${nginx_version}.tar.gz
 nginx_user=www
 nginx_compile="--prefix=${desc_dir}/nginx --user=${nginx_user} --group=${nginx_user} \
 --with-select_module --with-poll_module --with-http_ssl_module --with-pcre \
