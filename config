@@ -67,7 +67,7 @@ mysql_password=1
 
 
 # ############## PHP Config ##############
-php_version=php-7.1.20
+php_version=php-7.1.22
 php_url=http://cn2.php.net/distributions/${php_version}.tar.gz
 php_user=www
 php_compile="--prefix=${desc_dir}/php --with-config-file-path=${desc_dir}/php/etc \

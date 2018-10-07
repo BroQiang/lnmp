@@ -125,8 +125,12 @@ function fnSshd()
 function fnVimrc()
 {
     filePath="/home/${loginUser}/.vimrc"
-    echo -e "\n:set nu\n:set tabstop=4\n:set expandtab\n\
-:set autoindent\n:set shiftwidth=4\n:set smartindent" > ${filePath}
+
+    if [[ $UID == 0 ]]; then
+        filePath="/root/.vimrc"
+    fi
+
+    echo -e "\nset nu\nset tabstop=4\nset expandtab\nset shiftwidth=4\n" > ${filePath}
 
     chown -R ${loginUser}:${loginUser} ${filePath}
 
