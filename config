@@ -53,7 +53,7 @@ libpcre3-dev zlib1g-dev re2c libreadline-dev"
 
 
 # ############## MySQL Config ##############
-mysql_version=mysql-boost-5.7.23
+mysql_version=mysql-boost-5.7.24
 mysql_url=https://cdn.mysql.com/Downloads/MySQL-5.7/${mysql_version}.tar.gz
 mysql_compile="-DCMAKE_INSTALL_PREFIX=${desc_dir}/mysql -DDEFAULT_CHARSET=utf8mb4 \
 -DWITH_BOOST=../boost/boost_1_59_0 -DMYSQL_DATADIR=/data/mysql/data -DWITH_SYSTEMD=1"
@@ -67,7 +67,7 @@ mysql_password=1
 
 
 # ############## PHP Config ##############
-php_version=php-7.1.22
+php_version=php-7.1.25
 php_url=http://cn2.php.net/distributions/${php_version}.tar.gz
 php_user=www
 php_compile="--prefix=${desc_dir}/php --with-config-file-path=${desc_dir}/php/etc \
@@ -80,7 +80,7 @@ php_compile="--prefix=${desc_dir}/php --with-config-file-path=${desc_dir}/php/et
 
 # ############## Nginx Config ##############
 # tengine
-nginx_version=tengine-2.2.2
+nginx_version=tengine-2.2.3
 nginx_url=http://tengine.taobao.org/download/${nginx_version}.tar.gz
 
 
