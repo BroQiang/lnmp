@@ -36,7 +36,7 @@ loginUser=bro
 # 源码保存目录
 src_dir=/usr/local/src/
 # 安装软件的基目录
-desc_dir=/usr/local/
+desc_dir=/usr/local
 
 # 编译的时候的线程数
 makeJ=4
